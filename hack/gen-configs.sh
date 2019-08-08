@@ -36,5 +36,5 @@ for NODE in ${NODES}; do
   # haproxy
   scp ${HAPROXY_TPML} ${NODE}:/etc/haproxy/haproxy.cfg 2>&1 > /dev/null
   ssh ${NODE} "sed -i 's/\${API_SERVERS}/${HAPROXY_BACKENDS}/g' /etc/haproxy/haproxy.cfg"
-  echo "${RED}${NODE}${NC} config generated..."
+  echo -e "${RED}${NODE}${NC} config generated..."
 done

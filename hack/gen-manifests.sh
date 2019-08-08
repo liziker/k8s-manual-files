@@ -23,7 +23,7 @@ ENCRYPT_SECRET=$(openssl rand -hex 16)
 ETCD_SERVERS=""
 UNICAST_PEERS=""
 for NODE in ${NODES}; do
-  IP=$(ssh ${NODE} "ip route get 8.8.8.8" | awk '{print $NF; exit}')
+  IP=$(ssh ${NODE} "ip route get 192.168.60.1" | awk '{print $NF; exit}')
   ETCD_SERVERS="${ETCD_SERVERS}https:\/\/${IP}:2379,"
   UNICAST_PEERS="${UNICAST_PEERS}'${IP}',"
   HOST_END=${IP}
@@ -61,6 +61,6 @@ for NODE in ${NODES}; do
   # configure audit
   scp ${ADUIT_TPML_DIR}/policy.yml ${NODE}:${ADUIT_PATH}/policy.yml 2>&1 > /dev/null
 
-  echo "${RED}${NODE}${NC} manifests generated..."
+  echo -e "${RED}${NODE}${NC} manifests generated..."
   i=$((i+1))
 done
