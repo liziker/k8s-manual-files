@@ -6,7 +6,7 @@
 set -eu
 
 : ${NODES:="k8s-m1 k8s-m2 k8s-m3"}
-: ${ADVERTISE_VIP:="172.22.132.9"}
+: ${ADVERTISE_VIP:="192.168.60.20"}
 : ${MANIFESTS_TPML_DIR:="master/manifests"}
 : ${ENCRYPT_TPML_DIR:="master/encryption"}
 : ${ADUIT_TPML_DIR:="master/audit"}
@@ -17,7 +17,7 @@ NC='\033[0m'
 MANIFESTS_PATH="/etc/kubernetes/manifests"
 ENCRYPT_PATH="/etc/kubernetes/encryption"
 ADUIT_PATH="/etc/kubernetes/audit"
-HOST_START=$(ip route get 8.8.8.8 | awk '{print $NF; exit}')
+HOST_START=$(ip route get 192.168.60.1 | awk '{print $NF; exit}')
 ENCRYPT_SECRET=$(openssl rand -hex 16)
 
 ETCD_SERVERS=""
@@ -40,7 +40,7 @@ for NODE in ${NODES}; do
   done
 
   # configure keepalived
-  NIC=$(ssh ${NODE} "ip route get 8.8.8.8" | awk '{print $5; exit}')
+  NIC=$(ssh ${NODE} "ip route get 192.168.60.1" | awk '{print $5; exit}')
   PRIORITY=150
   if [ ${i} -eq 0 ]; then
     PRIORITY=100
