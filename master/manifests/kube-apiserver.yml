@@ -13,7 +13,7 @@ spec:
   priorityClassName: system-cluster-critical
   containers :
   - name: kube-apiserver
-    image: k8s.gcr.io/kube-apiserver-amd64:v1.11.0
+    image: k8s.gcr.io/kube-apiserver-amd64:v1.15.1
     command:
       - kube-apiserver
       - --v=0
@@ -23,7 +23,7 @@ spec:
       - --secure-port=5443
       - --insecure-port=0
       - --advertise-address=${ADVERTISE_VIP}
-      - --service-cluster-ip-range=10.96.0.0/12
+      - --service-cluster-ip-range=10.0.0.0/12
       - --service-node-port-range=30000-32767
       - --etcd-servers=${ETCD_SERVERS}
       - --etcd-cafile=/etc/etcd/ssl/etcd-ca.pem

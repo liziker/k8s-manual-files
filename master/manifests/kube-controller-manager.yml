@@ -13,7 +13,7 @@ spec:
   priorityClassName: system-cluster-critical
   containers:
   - name: kube-controller-manager
-    image: k8s.gcr.io/kube-controller-manager-amd64:v1.11.0
+    image: k8s.gcr.io/kube-controller-manager-amd64:v1.15.1
     command:
       - kube-controller-manager
       - --v=0
@@ -31,7 +31,7 @@ spec:
       - --pod-eviction-timeout=2m0s
       - --controllers=*,bootstrapsigner,tokencleaner
       - --allocate-node-cidrs=true
-      - --cluster-cidr=10.244.0.0/16
+      - --cluster-cidr=10.64.0.0/10
       - --node-cidr-mask-size=24
     livenessProbe:
       failureThreshold: 8
