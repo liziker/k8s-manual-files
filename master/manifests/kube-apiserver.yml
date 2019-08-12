@@ -11,9 +11,11 @@ metadata:
 spec:
   hostNetwork: true
   priorityClassName: system-cluster-critical
+  imagePullSecrets:
+      - name: registry-guest
   containers :
   - name: kube-apiserver
-    image: k8s.gcr.io/kube-apiserver-amd64:v1.15.1
+    image: harbor.263italk.com/k8s/kube-apiserver-amd64:v1.15.1
     command:
       - kube-apiserver
       - --v=0

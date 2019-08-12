@@ -11,9 +11,11 @@ metadata:
 spec:
   hostNetwork: true
   priorityClassName: system-cluster-critical
+  imagePullSecrets:
+      - name: registry-guest
   containers:
   - name: kube-haproxy
-    image: docker.io/haproxy:2.0-alpine
+    image: harbor.263italk.com/coreos/haproxy:2.0-alpine
     resources:
       requests:
         cpu: 100m

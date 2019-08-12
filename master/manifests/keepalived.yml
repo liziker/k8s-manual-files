@@ -11,9 +11,11 @@ metadata:
 spec:
   hostNetwork: true
   priorityClassName: system-cluster-critical
+  imagePullSecrets:
+      - name: registry-guest
   containers:
   - name: kube-keepalived
-    image: docker.io/osixia/keepalived:2.0.17
+    image: harbor.263italk.com/coreos/keepalived:2.0.17
     env:
     - name: KEEPALIVED_VIRTUAL_IPS
       value: ${ADVERTISE_VIP}
