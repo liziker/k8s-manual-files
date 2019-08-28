@@ -9,7 +9,7 @@ set -eu
 : ${WITH_CFSSL:="false"}
 
 # install docker
-curl -fsSL "https://get.docker.com/" | sh
+#curl -fsSL "https://get.docker.com/" | sh
 
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.ipv4.ip_forward = 1
@@ -22,7 +22,7 @@ sudo sysctl -p /etc/sysctl.d/k8s.conf
 
 # close swap
 sudo swapoff -a && sudo sysctl -w vm.swappiness=0
-sudo sed '/swap.img/d' -i /etc/fstab
+sudo sed -i 's/.*swap/#&/' /etc/fstab
 
 # download cni bin
 sudo mkdir -p /opt/cni/bin && cd /opt/cni/bin
